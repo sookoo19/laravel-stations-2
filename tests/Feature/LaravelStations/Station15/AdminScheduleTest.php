@@ -33,8 +33,8 @@ class AdminScheduleTest extends TestCase
             for ($j = 0; $j < 10; $j++) {
                 Schedule::insert([
                     'movie_id' => $movieId,
-                    'start_time' => CarbonImmutable::createFromTime($j, 0, 0),
-                    'end_time' => CarbonImmutable::createFromTime($j + 2, 0, 0),
+                    'start_time' => CarbonImmutable::createFromTime(2025, 6, 1, $j, 0, 0),
+                    'end_time' => CarbonImmutable::createFromTime(2025, 6, 1, $j + 2, 0, 0),
                 ]);
             }
         }
@@ -52,8 +52,8 @@ class AdminScheduleTest extends TestCase
                 $response->assertSeeText('上映予定');
             }
             foreach ($movie->schedules as $schedule) {
-                $response->assertSeeText($schedule->start_time);
-                $response->assertSeeText($schedule->end_time);
+                $response->assertSeeText($schedule->start_time->format('Y-m-d H:i:s'));
+                $response->assertSeeText($schedule->end_time->format('Y-m-d H:i:s'));
             }
         }
         $response->assertDontSee('true');

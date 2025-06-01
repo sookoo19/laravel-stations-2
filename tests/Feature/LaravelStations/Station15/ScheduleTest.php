@@ -64,18 +64,18 @@ class ScheduleTest extends TestCase
         $movieId = $this->createMovie()->id;
         $schedule1 = Schedule::create([
             'movie_id' => $movieId,
-            'start_time' => Carbon::createFromTime(20, 00, 00),
-            'end_time' => Carbon::createFromTime(21, 00, 00),
+            'start_time' => Carbon::createFromTime(20, 00, 00->format('Y-m-d H:i:s')),
+            'end_time' => Carbon::createFromTime(21, 00, 00)->format('Y-m-d H:i:s'),
         ]);
         $schedule2 = Schedule::create([
             'movie_id' => $movieId,
-            'start_time' => Carbon::createFromTime(10, 00, 00),
-            'end_time' => Carbon::createFromTime(11, 00, 00),
+            'start_time' => Carbon::createFromTime(10, 00, 00)->format('Y-m-d H:i:s'),
+            'end_time' => Carbon::createFromTime(11, 00, 00)->format('Y-m-d H:i:s'),
         ]);
         $schedule3 = Schedule::create([
             'movie_id' => $movieId,
-            'start_time' => Carbon::createFromTime(13, 00, 00),
-            'end_time' => Carbon::createFromTime(14, 00, 00),
+            'start_time' => Carbon::createFromTime(13, 00, 00)->format('Y-m-d H:i:s'),
+            'end_time' => Carbon::createFromTime(14, 00, 00)->format('Y-m-d H:i:s'),
         ]);
 
         $response = $this->get('/movies/' . $movieId);

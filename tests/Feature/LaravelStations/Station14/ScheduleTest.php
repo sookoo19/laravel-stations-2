@@ -63,20 +63,22 @@ class ScheduleTest extends TestCase
     {
         $movieId = $this->createMovie()->id;
         $schedule1 = Schedule::create([
-            'movie_id' => $movieId,
-            'start_time' => Carbon::createFromTime(20, 00, 00),
-            'end_time' => Carbon::createFromTime(21, 00, 00),
-        ]);
-        $schedule2 = Schedule::create([
-            'movie_id' => $movieId,
-            'start_time' => Carbon::createFromTime(10, 00, 00),
-            'end_time' => Carbon::createFromTime(11, 00, 00),
-        ]);
-        $schedule3 = Schedule::create([
-            'movie_id' => $movieId,
-            'start_time' => Carbon::createFromTime(13, 00, 00),
-            'end_time' => Carbon::createFromTime(14, 00, 00),
-        ]);
+    'movie_id' => $movieId,
+    'start_time' => '20:00:00', // 文字列で保存
+    'end_time' => '21:00:00',
+]);
+
+$schedule2 = Schedule::create([
+    'movie_id' => $movieId,
+    'start_time' => '10:00:00',
+    'end_time' => '11:00:00',
+]);
+
+$schedule3 = Schedule::create([
+    'movie_id' => $movieId,
+    'start_time' => '13:00:00',
+    'end_time' => '14:00:00',
+]);
 
         $response = $this->get('/movies/' . $movieId);
         $response->assertSeeTextInOrder([
